@@ -1,6 +1,6 @@
 package br.com.mapets.domain.model.enuns;
 
-public enum TipoEnum {
+public enum TipoPetEnum {
     GATO,
     CACHORRO
 }

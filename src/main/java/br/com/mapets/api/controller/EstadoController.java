@@ -1,12 +1,16 @@
 package br.com.mapets.api.controller;
 
+import br.com.mapets.api.dto.input.EstadoInputDto;
+import br.com.mapets.api.dto.output.EstadoOutputDto;
 import br.com.mapets.domain.model.Estado;
 import br.com.mapets.domain.repository.EstadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,25 +22,58 @@ public class EstadoController {
     private EstadoRepository estadoRepository;
 
     @GetMapping
-    public List<Estado> listar(){
-        return estadoRepository.findAll();
+    public List<EstadoOutputDto> listar(){
+        return EstadoOutputDto.buildComCidadesDto(estadoRepository.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Estado> buscar(@PathVariable Integer id){
+    public ResponseEntity<EstadoOutputDto> buscar(@PathVariable Integer id){
 
         Optional<Estado> estado = estadoRepository.findById(id);
 
         if(estado.isPresent()){
-            return ResponseEntity.ok(estado.get());
+            EstadoOutputDto estadoOutputDto = new EstadoOutputDto(estado.get());
+            return ResponseEntity.ok(estadoOutputDto);
         }
         return ResponseEntity.notFound().build();
     }
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Estado adicionar(@RequestBody Estado estado){
-        return estadoRepository.save(estado);
+    @GetMapping("/busca/{nome}")
+    public List<EstadoOutputDto> buscarLike(@PathVariable String nome){
+
+        List<Estado> estados = estadoRepository.findByNomeContaining(nome);
+        List<EstadoOutputDto> estadosDto = EstadoOutputDto.buildComCidadesDto(estados);
+
+        return estadosDto;
+    }
+
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<EstadoOutputDto> adicionar(@RequestBody EstadoInputDto estadoInputDto,
+                                                    UriComponentsBuilder uriBuilder){
+        Estado estado = estadoInputDto.build();
+        estadoRepository.save(estado);
+        EstadoOutputDto estadoOutputDto = new EstadoOutputDto(estado);
+
+        URI path = uriBuilder.path("estado/{id}").buildAndExpand(estado.getCod()).toUri();
+        return ResponseEntity.created(path).body(estadoOutputDto);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<EstadoOutputDto> editar(@RequestBody EstadoInputDto estadoInputDto,
+                                                  @PathVariable Integer id){
+
+        try {
+            Estado estado = estadoRepository.findById(id).get();
+            estado = estadoInputDto.buildAlterar(estado);
+
+            estadoRepository.save(estado);
+            EstadoOutputDto estadoOutputDto = new EstadoOutputDto(estado);
+
+            return ResponseEntity.ok(estadoOutputDto);
+        }catch (Exception e){
+            System.err.println(e);
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @DeleteMapping("/{id}")

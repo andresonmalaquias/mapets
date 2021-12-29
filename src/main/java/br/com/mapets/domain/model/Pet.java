@@ -1,17 +1,10 @@
 package br.com.mapets.domain.model;
 
 import br.com.mapets.domain.model.enuns.PersonalidadeEnum;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
-import org.springframework.format.annotation.DateTimeFormat;
+import br.com.mapets.domain.model.enuns.PorteEnum;
+import br.com.mapets.domain.model.enuns.TipoPetEnum;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class Pet {
@@ -24,24 +17,26 @@ public class Pet {
 
     private String sexo;
 
-    @JsonFormat(pattern = "yyyy/MM/dd", shape = JsonFormat.Shape.STRING)
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    @JsonSerialize(using = LocalDateTimeSerializer.class)
-    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-    private LocalDateTime nascimento;
+    private int idade_meses;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    private Pessoa adotante;
+    private TipoPetEnum tipo;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
-    private List<Pessoa> interessados;
-
-    @ElementCollection(targetClass = PersonalidadeEnum.class)
+    /*@ElementCollection(targetClass = PersonalidadeEnum.class)
     @Enumerated(EnumType.STRING)
-    private List<PersonalidadeEnum> personalidade;
+    private List<PersonalidadeEnum> personalidade;*/
 
-    @Embedded
-    private CriterioPet criterio;
+    private PersonalidadeEnum personalidade;
+
+    private PorteEnum porte;
+
+    private boolean indoor;
+
+    @OneToOne(cascade = CascadeType.PERSIST)
+    private Pessoa responsavel;
+
+    public Integer getId() {
+        return id;
+    }
 
     public String getNome() {
         return nome;
@@ -59,63 +54,75 @@ public class Pet {
         this.sexo = sexo;
     }
 
-    public LocalDateTime getNascimento() {
-        return nascimento;
+    public int getIdade_meses() {
+        return idade_meses;
     }
 
-    public void setNascimento(LocalDateTime nascimento) {
-        this.nascimento = nascimento;
+    public void setIdade_meses(int idade_meses) {
+        this.idade_meses = idade_meses;
     }
 
-    public Pessoa getAdotante() {
-        return adotante;
+    public TipoPetEnum getTipo() {
+        return tipo;
     }
 
-    public void setAdotante(Pessoa adotante) {
-        this.adotante = adotante;
-        adotante.setPet(this);
+    public void setTipo(TipoPetEnum tipo) {
+        this.tipo = tipo;
     }
 
-    public List<Pessoa> getInteressados() {
-        return interessados;
+    /*public List<PersonalidadeEnum> getPersonalidade() {
+        return personalidade;
     }
 
-    public void setInteressados(Pessoa interessado) {
-        this.interessados.add(interessado);
-    }
+    public void setPersonalidade(List<PersonalidadeEnum> personalidade) {
+        this.personalidade = personalidade;
+    }*/
 
-    public List<PersonalidadeEnum> getPersonalidade() {
+    public PersonalidadeEnum getPersonalidade() {
         return personalidade;
     }
 
     public void setPersonalidade(PersonalidadeEnum personalidade) {
-        this.personalidade.add(personalidade);
+        this.personalidade = personalidade;
     }
 
-    public CriterioPet getCriterio() {
-        return criterio;
+    public PorteEnum getPorte() {
+        return porte;
     }
 
-    public void setCriterio(CriterioPet criterio) {
-        this.criterio = criterio;
+    public void setPorte(PorteEnum porte) {
+        this.porte = porte;
     }
 
-    public Pet(String nome, String sexo, LocalDateTime nascimento, Pessoa adotante, Pessoa interessado, PersonalidadeEnum personalidade, CriterioPet criterio) {
-        this.interessados = new ArrayList();
-        this.personalidade = new ArrayList();
-        this.nome = nome;
-        this.sexo = sexo;
-        this.nascimento = nascimento;
-        this.adotante = adotante;
-        this.interessados.add(interessado);
-        this.personalidade.add(personalidade);
-        this.criterio = criterio;
+    public boolean getIndoor() {
+        return indoor;
+    }
+
+    public void setIndoor(boolean indoor) {
+        this.indoor = indoor;
+    }
+
+    public Pessoa getResponsavel() {
+        return responsavel;
+    }
+
+    public void setResponsavel(Pessoa responsavel) {
+        this.responsavel = responsavel;
     }
 
     public Pet() {
-        this.interessados = new ArrayList();
-        this.personalidade = new ArrayList();
+        //this.personalidade = new ArrayList();
     }
 
-
+    public Pet(String nome, String sexo, int idade_meses, TipoPetEnum tipo, PersonalidadeEnum personalidade, PorteEnum porte, boolean indoor, Pessoa responsavel) {
+        //this.personalidade = new ArrayList();
+        this.nome = nome;
+        this.sexo = sexo;
+        this.idade_meses = idade_meses;
+        this.tipo = tipo;
+        this.personalidade = personalidade;
+        this.porte = porte;
+        this.indoor = indoor;
+        this.responsavel = responsavel;
+    }
 }

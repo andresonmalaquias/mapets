@@ -1,15 +1,14 @@
 package br.com.mapets.domain.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
-import org.springframework.format.annotation.DateTimeFormat;
+import br.com.mapets.domain.model.enuns.TipoPessoaEnum;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 @Entity
 public class Pessoa {
@@ -20,26 +19,28 @@ public class Pessoa {
 
     private  String cpf;
 
+    private String nome;
+
     private String sexo;
 
     private  String telefone;
 
-    @JsonFormat(pattern = "yyyy/MM/dd", shape = JsonFormat.Shape.STRING)
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    @JsonSerialize(using = LocalDateTimeSerializer.class)
-    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime dtNascimento;
 
     private String endereco;
 
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "adotante")
+    @OneToMany(cascade = CascadeType.PERSIST)
     private List<Pet> pet;
+
+    @Enumerated(EnumType.STRING)
+    private TipoPessoaEnum tipoPessoaEnum;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Cidade cidade;
 
-    @Embedded
-    private CriterioPessoa criterio;
+    public Integer getId() {
+        return id;
+    }
 
     public String getCpf() {
         return cpf;
@@ -47,6 +48,14 @@ public class Pessoa {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getSexo() {
@@ -65,12 +74,14 @@ public class Pessoa {
         this.telefone = telefone;
     }
 
-    public LocalDateTime getDtNascimento() {
-        return dtNascimento;
+    public String getDtNascimento() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.ROOT);
+        return dtNascimento.format(formatter);
     }
 
-    public void setDtNascimento(LocalDateTime dtNascimento) {
-        this.dtNascimento = dtNascimento;
+    public void setDtNascimento(String dtNascimento) {
+        DateTimeFormatter parser = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        this.dtNascimento = LocalDate.parse(dtNascimento, parser).atStartOfDay();
     }
 
     public String getEndereco() {
@@ -88,41 +99,39 @@ public class Pessoa {
     public void setPet(Pet pet) {
         if(!this.pet.contains(pet)){
             this.pet.add(pet);
-            pet.setAdotante(this);
         }
-
     }
 
-    public CriterioPessoa getCriterio() {
-        return criterio;
+    public TipoPessoaEnum getTipoPessoaEnum() {
+        return tipoPessoaEnum;
     }
 
-    public void setCriterio(CriterioPessoa criterio) {
-        this.criterio = criterio;
+    public void setTipoPessoaEnum(TipoPessoaEnum tipoPessoaEnum) {
+        this.tipoPessoaEnum = tipoPessoaEnum;
     }
 
-    /*public Pessoa() {
-        this.pet = new ArrayList();
-    }*/
+    public Cidade getCidade() {
+        return cidade;
+    }
 
-    public Pessoa(String cpf, String sexo, String telefone, LocalDateTime dtNascimento, String endereco, Cidade cidade, CriterioPessoa criterio) {
-        this.cpf = cpf;
-        this.sexo = sexo;
-        this.telefone = telefone;
-        this.dtNascimento = dtNascimento;
-        this.endereco = endereco;
+    public void setCidade(Cidade cidade) {
         this.cidade = cidade;
-        this.criterio = criterio;
+        this.cidade.setPessoas(this);
     }
 
     public Pessoa() {
+        this.pet = new ArrayList();
     }
 
-    public Pessoa(String cpf, String sexo, String telefone, LocalDateTime dtNascimento, String endereco) {
+    public Pessoa(String cpf, String nome, String sexo, String telefone, LocalDateTime dtNascimento, String endereco, TipoPessoaEnum tipoPessoaEnum, Cidade cidade) {
         this.cpf = cpf;
+        this.nome = nome;
         this.sexo = sexo;
         this.telefone = telefone;
         this.dtNascimento = dtNascimento;
         this.endereco = endereco;
+        this.pet = new ArrayList();
+        this.tipoPessoaEnum = tipoPessoaEnum;
+        this.cidade = cidade;
     }
 }
