@@ -134,4 +134,14 @@ public class Pessoa {
         this.tipoPessoaEnum = tipoPessoaEnum;
         this.cidade = cidade;
     }
+
+    public Pessoa(String cpf, String nome, String endereco, TipoPessoaEnum tipoPessoaEnum, String sexo, String telefone) {
+        this.cpf = cpf;
+        this.nome = nome;
+        this.endereco = endereco;
+        this.tipoPessoaEnum = tipoPessoaEnum;
+        this.sexo = sexo;
+        this.telefone = telefone;
+
+    }
 }

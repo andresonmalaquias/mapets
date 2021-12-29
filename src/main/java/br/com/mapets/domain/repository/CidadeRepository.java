@@ -13,4 +13,7 @@ public interface CidadeRepository extends JpaRepository<Cidade, Integer> {
     Cidade findCidade(@Param("pNome") String nome);
 
     List<Cidade> findByNomeContaining(String nome);
+
+    Cidade findByCod(Integer cod);
+    Cidade findByNome(String nome);
 }

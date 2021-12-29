@@ -15,4 +15,6 @@ public interface PessoaRepository extends JpaRepository<Pessoa, Integer> {
     Pessoa findPessoa(@Param("pNome") String nome);
 
     List<Pessoa> findByNomeContaining(String nome);
+
+
 }
