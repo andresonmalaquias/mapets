@@ -22,7 +22,7 @@ public class CidadeController {
 
     @Autowired
     private CidadeRepository cidadeRepository;
-
+ 
     @Autowired
     private EstadoRepository estadoRepository;
 
