@@ -115,9 +115,11 @@ class MapetsTest {
         if (cidadeRepository.findCidade(c.getNome())==null) {
             cidadeRepository.save(c);
             System.out.println("Cidade "+c.getNome()+" Cadastrada com Sucesso!");
+            System.out.println("Estado "+e.getNome()+" Cadastrada com Sucesso!");
         }else {
             System.out.println("Cidade "+c.getNome()+" já Cadastrada!");
             c = cidadeRepository.findCidade(c.getNome());
+            System.out.println("Estado "+e.getNome()+" já Cadastrada!");
             e = estadoRepository.findEstado(e.getNome());
         }
 
@@ -144,7 +146,7 @@ class MapetsTest {
 
         assertThat(cidade).isNotNull();
 
-        System.out.println("Cidade encontarda com sucesso!\nCodigo: "+cidade.getCod()+" Nome: "+cidade.getNome());
+        System.out.println("Cidade encontrada com sucesso!\nCodigo: "+cidade.getCod()+" Nome: "+cidade.getNome());
     }
 
     @Test
@@ -264,7 +266,7 @@ class MapetsTest {
     public void procurarPessoaPorNome() {
         pessoa = pessoaRepository.findPessoa("Rafael");
         if (pessoa.getNome().equals("Rafael")){
-            System.out.println("Pessoa encontrado com Sucesso! Nome:"+pessoa.getNome());
+            System.out.println("Pessoa encontrada com Sucesso! Nome:"+pessoa.getNome());
         }
         assertThat(pessoa).isNotNull();
     }
@@ -282,7 +284,7 @@ class MapetsTest {
         if(optionalPessoa.isPresent()){
             pessoa1 = optionalPessoa.get();
         }
-        System.out.println("Deletado o Pet com o Cod:" +pessoa.getId()+" Nome: "+pessoa.getNome());
+        System.out.println("Deletada a pessoa com o codigo:" +pessoa.getId()+" Nome: "+pessoa.getNome());
         assertThat(pessoa1).isNull();
     }
 
