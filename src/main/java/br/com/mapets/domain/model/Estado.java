@@ -11,6 +11,7 @@ public class Estado {
     @GeneratedValue
     private Integer cod;
 
+    @Column(nullable = false)
     private String nome;
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "estado")

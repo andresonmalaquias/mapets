@@ -17,25 +17,32 @@ public class Pessoa {
     @GeneratedValue
     private Integer id;
 
+    @Column(nullable = false, unique = true)
     private  String cpf;
 
+    @Column(nullable = false)
     private String nome;
 
+    @Column(nullable = false)
     private String sexo;
 
+    @Column(nullable = false)
     private  String telefone;
 
+    @Column(nullable = false)
     private LocalDateTime dtNascimento;
 
+    @Column(nullable = false)
     private String endereco;
 
     @OneToMany(cascade = CascadeType.PERSIST)
     private List<Pet> pet;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private TipoPessoaEnum tipoPessoaEnum;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.PERSIST, optional = false)
     private Cidade cidade;
 
     public Integer getId() {

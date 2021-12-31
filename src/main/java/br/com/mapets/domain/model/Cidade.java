@@ -11,9 +11,10 @@ public class Cidade {
     @GeneratedValue
     private Integer cod;
 
+    @Column(nullable = false)
     private String nome;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.PERSIST, optional = false)
     private Estado estado;
 
     @OneToMany(mappedBy = "cidade",cascade = CascadeType.PERSIST)

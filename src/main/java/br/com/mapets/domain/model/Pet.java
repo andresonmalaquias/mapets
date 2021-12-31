@@ -13,25 +13,32 @@ public class Pet {
     @GeneratedValue
     private Integer id;
 
+    @Column(nullable = false)
     private String nome;
 
+    @Column(nullable = false)
     private String sexo;
 
+    @Column(nullable = false)
     private int idade_meses;
 
+    @Column(nullable = false)
     private TipoPetEnum tipo;
 
     /*@ElementCollection(targetClass = PersonalidadeEnum.class)
     @Enumerated(EnumType.STRING)
     private List<PersonalidadeEnum> personalidade;*/
 
+    @Column(nullable = false)
     private PersonalidadeEnum personalidade;
 
+    @Column(nullable = false)
     private PorteEnum porte;
 
+    @Column(nullable = false)
     private boolean indoor;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.PERSIST, optional = false)
     private Pessoa responsavel;
 
     public Integer getId() {
