@@ -1,0 +1,117 @@
+@import "variables";
+
+mat-toolbar {
+  background-color: $theme-color-dark;
+  color: white;
+}
+
+.sidenav {
+  border-right: none;
+  color: $theme-color-dark;
+  width: 250px;
+
+  h5 {
+    font-weight: 900;
+    margin-left: 20px;
+    color: $theme-purple;
+  }
+
+  &__logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 30px;
+    margin-bottom: 50px;
+
+    h2 {
+      color: $theme-color-dark;
+      font-weight: bold;
+      margin-left: 10px;
+      padding-top: 8px;
+    }
+
+    img {
+      width: 30px;
+    }
+  }
+
+  &__menu {
+    div:first-of-type img {
+      width: 25px; 
+    }
+  }
+
+  &__config {
+    .line {
+      margin: 30px;
+      width: 80%;
+      height: 1px;
+      background-color: $gray;
+    }
+  }
+
+  &__menu, &__config {
+    padding: 20px;
+
+    &--item {
+      display: flex;
+      align-items: center;
+      color: $gray;
+      margin: 20px;
+
+      img {
+        max-width: 25px;
+        margin-right: 30px;
+      }
+    }
+  }
+
+  @media (max-width: 800px) {
+    width: 100%;
+  }
+}
+
+mat-sidenav-container {
+  min-height: 100%;
+
+  @media (max-width: 800px) {
+    min-height: calc(100vh - 370px);
+  }
+}
+
+mat-sidenav-content {
+  width: calc(100% - 250px);
+  display: flex;
+  min-height: 100vh;
+  align-items: flex-start;
+  justify-content: flex-start;
+  background-color: $theme-background;
+  padding: 60px;
+  flex-direction: column;
+
+  @media (max-width: 800px) {
+    width: calc(100%);
+    min-height: calc(100vh - 65px);
+    transition: all 0.5s ease-in-out;
+  }
+
+  @media (max-width: 970px) {
+    padding: 30px;
+    transition: all 0.5s ease-in-out;
+  }
+
+  @media (max-width: 480px) {
+    padding: 5px;
+  }
+}
+
+.home {
+  width: 100%;
+  max-width: 1200px;
+  transition: all 0.5s ease-in-out;
+  padding: 10px 0;
+
+  @media (max-width: 1024px) {
+    margin: 10px 0;
+  }
+}

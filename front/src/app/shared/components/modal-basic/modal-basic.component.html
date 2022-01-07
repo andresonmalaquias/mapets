@@ -1,0 +1,33 @@
+<div mat-dialog-title>
+  <h1>{{ title }}</h1>
+  <!-- <div [ngClass]="title ? 'close-container' : 'close-container no-title'">
+    <button mat-icon-button aria-label="Close" (click)="onCancel()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div> -->
+</div>
+<div
+  mat-dialog-content
+  [innerHTML]="body"
+  class="modal-content"
+></div>
+<!-- [innerHTML]="body | translate: bodyParam" -->
+
+<div mat-dialog-actions class="actions">
+  <button
+    *ngIf="hasCancel"
+    mat-stroked-button
+    class="cancel-button action-button"
+    (click)="onCancel()"
+  >
+    Cancelar
+  </button>
+  <button
+    color="primary"
+    mat-raised-button
+    class="confirm-button action-button"
+    (click)="onConfirm()"
+  >
+    Confirmar
+  </button>
+</div>

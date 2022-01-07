@@ -1,0 +1,133 @@
+<section class="container">
+  <div class="container-title">
+    <div class="header-title-help">
+      <h2 *ngIf="!routeId">Cadastrar novo pet</h2>
+      <h2 *ngIf="routeId">Editar meta</h2>
+    </div>
+  </div>
+  
+  <form class="form-container" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="container-monthly">
+      <div id="monthly-input">
+        <mat-form-field appearance="outline">
+          <mat-label>Nome</mat-label>
+          <input
+            matInput
+            required
+            type="text"
+            maxlength="61"
+            formControlName="nome"
+            NoWhiteSpaceDirective
+          />
+          <mat-error *ngIf="formControl('nome').invalid">
+            {{ getErrorMessage("nome") }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Sexo</mat-label>
+          <input
+            matInput
+            required
+            type="text"
+            maxlength="61"
+            formControlName="sexo"
+            NoWhiteSpaceDirective
+          />
+          <mat-error *ngIf="formControl('sexo').invalid">
+            {{ getErrorMessage("sexo") }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Idade em Meses</mat-label>
+          <input
+            matInput
+            required
+            type="text"
+            maxlength="61"
+            formControlName="idadeMeses"
+            NoWhiteSpaceDirective
+          />
+          <mat-error *ngIf="formControl('idadeMeses').invalid">
+            {{ getErrorMessage("idadeMeses") }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Tipo</mat-label>
+          <input
+            matInput
+            required
+            type="text"
+            maxlength="61"
+            formControlName="tipo"
+            NoWhiteSpaceDirective
+          />
+          <mat-error *ngIf="formControl('tipo').invalid">
+            {{ getErrorMessage("tipo") }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Personalidade</mat-label>
+          <input
+            matInput
+            required
+            type="text"
+            maxlength="61"
+            formControlName="personalidade"
+            NoWhiteSpaceDirective
+          />
+          <mat-error *ngIf="formControl('personalidade').invalid">
+            {{ getErrorMessage("personalidade") }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Porte</mat-label>
+          <input
+            matInput
+            required
+            type="text"
+            maxlength="61"
+            formControlName="porte"
+            NoWhiteSpaceDirective
+          />
+          <mat-error *ngIf="formControl('porte').invalid">
+            {{ getErrorMessage("porte") }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" required>
+          <mat-label>Indoor</mat-label>
+          <mat-select formControlName="indoor" required>
+            <mat-option
+              [value]="true">
+              Ambiente aberto
+            </mat-option>
+            <mat-option
+              [value]="false">
+              Ambiente fechado
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="formControl('indoor').invalid">
+            {{ getErrorMessage('indoor') }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</section>
+<div class="action-buttons">
+  <button mat-flat-button class="cancel-btn" routerLink="/metas">
+    Cancelar
+  </button>
+  <button
+    mat-flat-button
+    class="save-btn"
+    [disabled]="!form.valid || !form.dirty"
+    (click)="onSubmit()"
+  >
+    Salvar
+  </button>
+</div>

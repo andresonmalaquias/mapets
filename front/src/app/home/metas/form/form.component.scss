@@ -1,0 +1,185 @@
+@import "variables";
+
+.container {
+  background-color: $white;
+  // max-width: 800px;
+  padding: 35px;
+  border-radius: 15px;
+
+  .simulator {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+
+    h3 {
+      color: $theme-red;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    h4 {
+      margin-top: 5px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    div {
+      width: 100px;
+      height: 100px;
+      background-color: rgba(34, 197, 139, 0.1);
+      border: 2px solid $theme-color-dark;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+
+      span {
+        color: $theme-color-dark
+      }
+    }
+
+    section {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      h4 {
+        margin: 15px 0px;
+      }
+    }
+  }
+
+  &-title {
+    margin-bottom: 35px;
+
+    .attention {
+      color: $theme-red;
+
+      h4 {
+        margin: 24px;
+        font-weight: 500;
+        line-height: 1.4;
+        text-align: center;
+      }
+    }
+  }
+
+  .header-title-help {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+
+    .credito-help {
+      display: flex;
+      align-items: center;
+    }
+
+    .credito-help li:nth-child(2) {
+      margin-left: 5px;
+    }
+
+    @media (max-width: 800px) {
+      ul li {
+        max-width: 55px;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 968px) {
+    .container {
+      padding: 5px 10px;
+    }
+
+    #monthly-input {
+      width: 100%;
+    }
+
+    .often-paid-container {
+      .often-paid {
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
+
+        .often {
+          flex: none;
+        }
+      }
+
+      #often-paid-top {
+        margin-bottom: 10px;
+      }
+    }
+
+    .day-paid-container .day-paid .day-week {
+      width: 50%;
+      margin-bottom: 20px;
+    }
+  }
+
+  .form-container {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+
+    .container-monthly {
+      flex: 1;
+
+      h4 {
+        line-height: 1.4;
+        max-width: 445px;
+      }
+  
+      .fixed {
+        mat-radio-group {
+          display: flex;
+          margin-bottom: 20px;
+          
+          mat-radio-button:first-of-type {
+            margin-right: 20px;
+          }
+        }
+  
+        h4 {
+          margin-bottom: 10px;
+        }
+      }
+
+      .fixed-container {
+        display: flex;
+        justify-content: space-between;
+
+        .fixed {
+          flex: 1;
+
+          h4 {
+            font-weight: 500;
+          }
+        }
+
+        form {
+          flex: 1;
+          width: 100%;
+        }
+
+        @media (max-width: 800px) {
+          flex-direction: column;
+        }
+      }
+    }
+  }
+}
+
+// .action-buttons {
+//   max-width: 800px;
+// }
+
+// @media (max-width: 800px) {
+//   .container .form-container {
+//   }
+// }

@@ -1,0 +1,28 @@
+/* * 
+* Functions
+*/
+$browser-context: 16;
+
+// conversão de PX para REM
+@function rem($pixels, $context: $browser-context) {
+  @return #{$pixels/$context}rem;
+}
+
+// Colors
+$theme-color: #33CDA1;
+$theme-color-dark: #1AAD83;
+$theme-yellow: #FFCD5B;
+$theme-background: #f8f9fd;
+$theme-purple: #5b5675;
+$theme-purple-light: #6f6b86;
+$theme-violet: #9B66AC;
+$gray: #9995a9;
+$black: #000000;
+$white: #ffffff;
+$box-shadow: #00000029;
+$theme-orange: #f0932b;
+$theme-red: #eb445a;
+
+//Cancel button
+$btn-cancel-color: #646464;
+$btn-cancel-border: #BFBFBF;

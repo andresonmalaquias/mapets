@@ -1,0 +1,21 @@
+@import "variables";
+
+.version-container {
+  max-width: 100%;
+
+  p {
+    color: orange;
+    line-height: 20px;
+    padding-right: 30px;
+  }
+}
+
+.version {
+  margin: auto;
+}
+
+@media (max-width: 768px) {
+  .version-container p {
+    padding-right: 0;
+  }
+}

@@ -1,0 +1,50 @@
+<div class="home-container">
+  <mat-toolbar *ngIf="sidenav.mode === 'over'">
+    <button
+      mat-icon-button
+      class="example-icon"
+      aria-label="Example icon-button with menu icon"
+      (click)="sidenav.toggle()"
+    >
+      <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
+      <mat-icon *ngIf="sidenav.opened">close</mat-icon>
+    </button>
+    <span>MaxMeta</span>
+    <span class="example-spacer"></span>
+  </mat-toolbar>
+
+  <mat-sidenav-container>
+    <mat-sidenav mode="side" class="sidenav">
+      <section class="sidenav__logo">
+        <img src="../../assets/images/pets.png" alt="Pets" />
+        <h2>Mapets</h2>
+      </section>
+      <section class="sidenav__menu">
+        <h5>Menu</h5>
+        <div class="sidenav__menu--item">
+          <img src="../../assets/images/pets.png" alt="Pets" />
+          <a routerLink="pets">Pets</a>
+        </div>
+        <!-- <div class="sidenav__menu--item" *ngIf="user.username === 'admin'">
+          <img src="../../assets/images/challenge.svg" alt="Usuários" />
+          <a routerLink="usuarios">Usuários</a>
+        </div> -->
+      </section>
+      <section class="sidenav__config">
+        <div class="line"></div>
+        
+        <div class="sidenav__menu--item" alt="Sair">
+          <button mat-icon-button (click)="openLogoutDialog()">
+            <img src="../../assets/images/logout.svg" alt="Sair" />
+            Sair
+          </button>
+        </div>
+      </section>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div class="home">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

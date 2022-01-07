@@ -1,0 +1,65 @@
+@import "variables";
+
+.mat-dialog-title h1, .mat-dialog-content {
+  text-align: center;
+}
+
+.mat-dialog-title h1 {
+  font-weight: 500;
+  color: #5A5A5A;
+}
+
+.mat-dialog-content {
+  font-weight: 200;
+  color: #797979;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.confirm-button {
+  background-color: $theme-color;
+  color: $white;
+  font-size: 13px;
+  margin-left: 15px !important;
+  padding: 0px 30px;
+}
+
+.cancel-button {
+  background-color: $theme-red;
+  border-radius: 3px;
+  background: transparent;
+  color: $btn-cancel-color;
+  border: 1px solid $btn-cancel-border;
+  font-size: 13px;
+  padding: 0px 30px;
+}
+
+.close-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -35px;
+  height: 30px;
+}
+
+.no-title {
+  margin-top: -10px !important;
+}
+
+.modal-content {
+  padding: 10px 0px;
+  line-height: 25px;
+}
+
+@media (max-width: 578px) {
+  .actions {
+    flex-direction: column;
+  }
+
+  .action-button {
+    width: 100%;
+    margin: 0 0 15px 0 !important;
+  }
+}

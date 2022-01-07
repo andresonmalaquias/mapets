@@ -1,0 +1,34 @@
+import { Injectable } from '@angular/core';
+import { AbstractControl } from '@angular/forms';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ValidateFieldsService {
+
+  constructor() { }
+
+  hasErrorValidate(control: AbstractControl, errorName: string): boolean {
+    if((control.dirty || control.touched) && this.hasError(control, errorName)) {
+      return true 
+    }
+    return false;
+  }
+
+  hasError(control: AbstractControl, errorName: string): boolean {
+   
+    return control.hasError(errorName);
+  }
+
+  lengthValidar(control: AbstractControl, errorName: string): number {
+    const error = control.errors![errorName];
+    return error.requiredLength || error.min || error.max || 0;
+  }
+
+  formatDecimal(numberInt: any) {
+    var value = numberInt;
+    var len = value.length;
+    var valueFormat = value.substring(0, len - 2) + "." + value.substring(len - 2);
+    return valueFormat;
+  }
+}

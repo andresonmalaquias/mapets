@@ -1,0 +1,14 @@
+<div id="http-loader" *ngIf="isLoadingVisible">
+  <div class="loader-bg">
+    <div class="loader">
+      <div *ngIf="isSpinnerVisible && !message" class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+      </div>
+      <div class="message-bg" *ngIf="message">
+        <h1 [innerHTML]="message"></h1>
+      </div>
+    </div>
+  </div>
+</div>
