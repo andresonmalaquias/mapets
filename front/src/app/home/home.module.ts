@@ -7,9 +7,6 @@ import { SharedModule } from '../shared/shared.module';
 import { HomeComponent } from './home.component';
 import { metasRoute } from './metas/metas.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { AjudaComponent } from './ajuda/ajuda.component';
-import { MinhaContaComponent } from './minha-conta/minha-conta.component';
-import { UserRouteAccessService } from '../shared';
 
 export const homeRoute: Route = {
   path: '',
@@ -25,14 +22,6 @@ export const homeRoute: Route = {
     //   component: DashboardComponent,
     // },
     {
-      path: 'ajuda',
-      component: AjudaComponent,
-    },
-    {
-      path: 'minha-conta',
-      component: MinhaContaComponent,
-    },
-    {
       path: '',
       redirectTo: '/pets',
     },
@@ -40,7 +29,7 @@ export const homeRoute: Route = {
 };
 
 @NgModule({
-  declarations: [DashboardComponent, AjudaComponent, MinhaContaComponent],
+  declarations: [DashboardComponent],
   imports: [
     CommonModule,
     SharedModule,
